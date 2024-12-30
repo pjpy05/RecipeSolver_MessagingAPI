@@ -1,0 +1,19 @@
+※コマンドプロンプト※
+
+
+
+
+
+*****
+
+C:\Users\8Java3\RecipeSolver>git add .
+
+C:\Users\8Java3\RecipeSolver>git commit -m "12/25 LIFFテスト"
+[main 05798bf] 12/23 LIFFテスト
+ 4 files changed, 111 insertions(+), 58 deletions(-)
+ create mode 100644 liff/static/app1/server.js
+
+C:\Users\8Java3\RecipeSolver>git push
+
+
+

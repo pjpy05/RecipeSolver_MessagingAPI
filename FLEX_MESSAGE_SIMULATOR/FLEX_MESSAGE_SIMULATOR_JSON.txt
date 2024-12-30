@@ -1,0 +1,46 @@
+{
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "f\"種類:{category}\n-----\nメーカー:{manufacturer}\n商品名:{product_name}\n-----\n〇〇g当たり:{gram_per_unit}\ng以外の単位:{measurement_unit}\n熱量（kcal）:{calories}\nたんぱく質（g）:{protein}\n脂質（g）:{fat}\n炭水化物（g）:{carbohydrates}\n食塩相当量（g）:{sodium}\"",
+            "wrap": true
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "選択",
+              "uri": "http://linecorp.com/"
+            }
+          }
+        ]
+      },
+      "styles": {
+        "body": {
+          "separator": true
+        }
+      }
+    },
+    {
+      "type": "bubble",
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": []
+      }
+    }
+  ]
+}
