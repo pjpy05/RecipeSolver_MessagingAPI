@@ -65,10 +65,10 @@ def handle_message(event):
 #         app.logger.error(f"Error fetching data from Redis: {e}")
 #         return jsonify({"error": "Internal server error"}), 500
 
-# LIFF IDを提供するエンドポイント
-@app.route('/api/liff-id', methods=['GET'])
-def get_liff_id():
-    return jsonify({"liffId": LIFF_ID})
+# # LIFF IDを提供するエンドポイント
+# @app.route('/api/liff-id', methods=['GET'])
+# def get_liff_id():
+#     return jsonify({"liffId": LIFF_ID})
 
 
 if __name__ == "__main__":
