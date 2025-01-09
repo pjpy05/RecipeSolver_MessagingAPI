@@ -2,7 +2,6 @@ from flask import Flask, request, send_from_directory,abort,jsonify
 from linebot.models import MessageEvent
 from linebot.exceptions import InvalidSignatureError
 import os
-from tests.test_steps import test_steps
 
 from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
@@ -35,9 +34,6 @@ def webhook():
 
 @line_handler.add(MessageEvent)
 def handle_message(event):
-    if event.message.text=="test":
-        test_steps(event)
-
     try:
         # メッセージイベント処理
         go_to_next_step(event)

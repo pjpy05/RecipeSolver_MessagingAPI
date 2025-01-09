@@ -19,6 +19,7 @@ from config import GOOGLE_CREDENTIALS_JSON,USER_SPECIFIC_GOOGLE_SHEET_ID
 from data_management.google_sheets_client import GoogleSheetsClient
 
 from image_processing.vision_api import image_processing_a_step_3,image_processing_a_step_4
+from tests.test_steps import test_steps
 
 line_client = LineClient()
 line_api=line_client.api
@@ -59,8 +60,11 @@ def go_to_next_step(event):
 
     # elif current_scenario =="a_step_3":
     #         scenario_a.handle_step_4_1_2(event)
+
+    if request_text=="test":
+        test_steps(event)
         
-    if request_text=="調味料の登録":
+    elif request_text=="調味料の登録":
         # a_step_2
         redis_client.hset(event.source.user_id,'current_scenario','a_step_2')
         line_api.reply_message(event.reply_token,get_step_2_message())
