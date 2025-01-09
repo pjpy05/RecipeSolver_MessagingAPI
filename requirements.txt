@@ -11,3 +11,4 @@ redis==5.2.0
 gspread==6.1.4
 pandas==2.2.3
 requests-oauthlib==2.0.0
+Flask-Cors==5.0.0

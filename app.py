@@ -7,11 +7,14 @@ from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
 from liff.liff_module import get_context
 
+from flask_cors import CORS
+
 # 設定
 app = Flask(__name__)
 line_client = LineClient()
 line_api=line_client.api
 line_handler=line_client.handler
+CORS(app)  # 全てのエンドポイントでCORSを許可
 
 # Webhookエンドポイントを設定
 @app.route("/webhook", methods=["POST"])
