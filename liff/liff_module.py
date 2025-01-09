@@ -4,6 +4,6 @@ redis=RedisClient()
 redis_client=redis.client
 
 # LIFFにデータを渡す
-def liff(user_id):
+def get_context(user_id):
     redis_json=redis.get_hash_as_json(user_id)
     return redis_json

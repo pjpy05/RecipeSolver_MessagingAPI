@@ -5,8 +5,7 @@ import os
 
 from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
-from liff import liff
-from config import LIFF_ID
+from liff.liff_module import get_context
 
 # 設定
 app = Flask(__name__)
@@ -45,7 +44,7 @@ def handle_message(event):
 
 @app.route('/get/<user_id>', methods=['GET'])
 def get_redis_json(user_id):
-    redis_json = liff(user_id)
+    redis_json = get_context(user_id)
     return redis_json
 
 # # LIFFアプリ用データのAPIエンドポイント
