@@ -13,7 +13,7 @@ from line_bot.scenario_a.messages import (
     get_step_9_message,
     get_scenario_end_message
 )
-from data_management.redis_client import RedisClient,get_hash_as_json
+from data_management.redis_client import RedisClient
 
 from config import GOOGLE_CREDENTIALS_JSON,USER_SPECIFIC_GOOGLE_SHEET_ID
 from data_management.google_sheets_client import GoogleSheetsClient
@@ -44,7 +44,7 @@ def test_steps(event):
     # redis_client.hset(user_id,'current_scenario','a_step_2')
     # line_api.reply_message(event.reply_token,get_step_2_message())
     
-    redis_json=get_hash_as_json(user_id)
+    redis_json=redis_client.get_hash_as_json(user_id)
     line_api.reply_message(reply_token,TextSendMessage(text=redis_json))
 
     # # a_step_2
