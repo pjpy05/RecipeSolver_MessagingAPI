@@ -2,6 +2,7 @@ import redis
 from typing import Any, Optional
 # from redis_user import RedisUser  # RedisUserを別ファイルからインポート
 from config import REDIS_URL
+import json
 
 class RedisClient:
     def __init__(self, host: Optional[str] = None, port: Optional[int] = None, db: int = 0):
@@ -21,3 +22,16 @@ class RedisClient:
                 db=db,
                 decode_responses=True
             )
+    
+    def get_hash_as_json(self, hash_name: str) -> str:
+        """
+        指定したハッシュ名に関連する全てのフィールドと値をJSON形式で取得。
+        
+        :param hash_name: Redisに保存されたハッシュの名前
+        :return: JSON形式の文字列
+        """
+        # ハッシュ型データを取得
+        hash_data = self.client.hgetall(hash_name)
+        
+        # JSON形式の文字列に変換
+        return json.dumps(hash_data, ensure_ascii=False)
