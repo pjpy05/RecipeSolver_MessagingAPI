@@ -5,6 +5,7 @@ import os
 
 from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
+from liff import liff
 from config import LIFF_ID
 
 # 設定
@@ -42,6 +43,10 @@ def handle_message(event):
         app.logger.error(f"Error in message handling: {e}")
         # 処理続行のため、エラーを通知せずログのみに記録
 
+@app.route('/get/<user_id>', methods=['GET'])
+def get_redis_json(user_id):
+    redis_json = liff(user_id)
+    return redis_json
 
 # # LIFFアプリ用データのAPIエンドポイント
 # @app.route('/liff-data', methods=['POST'])
