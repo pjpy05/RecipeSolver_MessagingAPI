@@ -44,7 +44,7 @@ def test_steps(event):
     # redis_client.hset(user_id,'current_scenario','a_step_2')
     # line_api.reply_message(event.reply_token,get_step_2_message())
     
-    redis_json=redis_client.get_hash_as_json(user_id)
+    redis_json=redis.get_hash_as_json(user_id)
     line_api.reply_message(reply_token,TextSendMessage(text=redis_json))
 
     # # a_step_2
