@@ -5,7 +5,7 @@ import os
 
 from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
-from liff.liff_module import get_context
+from liff.liff_module import get_context,set_context
 
 from flask_cors import CORS
 
@@ -52,6 +52,11 @@ def handle_message(event):
 def get_redis_json(user_id):
     redis_json = get_context(user_id)
     return redis_json
+
+# LIFFアプリから受け取ったJSONデータをRedisに渡すAPIエンドポイント
+@app.route('/post/<user_id>', methods=['POST'])
+def set_json_redis(user_id,json_data):
+    set_context(user_id,json_data)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
