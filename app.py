@@ -55,9 +55,22 @@ def get_redis_json(user_id):
 
 # LIFFアプリから受け取ったJSONデータをRedisに渡すAPIエンドポイント
 @app.route('/post/<user_id>', methods=['POST'])
-def set_json_redis(user_id,json_data):
-    set_context(user_id,json_data)
+def set_json_redis(user_id):
+    try:
+        # JSON データをリクエストから取得
+        json_data = request.get_json()
+        if not json_data:
+            return jsonify({"error": "No JSON data provided"}), 400
 
+        # 必要な処理を実行 (例: Redis に保存)
+        # redis_client.set(user_id, json.dumps(json_data))
+
+        return jsonify({"message": "Data saved successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=debug_mode)
+
