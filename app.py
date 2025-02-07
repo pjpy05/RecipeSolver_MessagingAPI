@@ -68,7 +68,7 @@ def set_json_redis(user_id):
             return jsonify({"error": "No JSON data provided"}), 400
 
         # 必要な処理を実行 (例: Redis に保存)
-        redis_client.set(user_id, json.dumps(json_data))
+        redis_client.set_hash_from_json(user_id, json.dumps(json_data))
 
         return jsonify({"message": "Data saved successfully"}), 200
     except Exception as e:
