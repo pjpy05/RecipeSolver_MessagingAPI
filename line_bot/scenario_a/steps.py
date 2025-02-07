@@ -11,7 +11,8 @@ from line_bot.scenario_a.messages import (
     get_step_4_3_message,
     get_step_8_message,
     get_step_9_message,
-    get_scenario_end_message
+    get_scenario_end_message,
+    redis_reset
 )
 from data_management.redis_client import RedisClient
 
@@ -66,6 +67,7 @@ def go_to_next_step(event):
 
     if request_text=="redis_reset":
         redis_client.delete(user_id)
+        redis_reset()
         
     elif request_text=="調味料の登録":
         # a_step_2
