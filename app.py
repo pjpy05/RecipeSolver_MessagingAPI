@@ -2,14 +2,12 @@ from flask import Flask, request, send_from_directory,abort,jsonify
 from linebot.models import MessageEvent
 from linebot.exceptions import InvalidSignatureError
 import os
-import json
 
 from line_bot.line_client import LineClient
 from line_bot.scenario_a.steps import go_to_next_step
 from liff.liff_module import get_context,set_context
 
 from flask_cors import CORS
-from data_management.redis_client import RedisClient
 
 # 設定
 app = Flask(__name__)
@@ -55,9 +53,6 @@ def get_redis_json(user_id):
     redis_json = get_context(user_id)
     return redis_json
 
-redis=RedisClient()
-redis_client=redis.client
-
 # LIFFアプリから受け取ったJSONデータをRedisに渡すAPIエンドポイント
 @app.route('/post/<user_id>', methods=['POST'])
 def set_json_redis(user_id):
@@ -68,7 +63,7 @@ def set_json_redis(user_id):
             return jsonify({"error": "No JSON data provided"}), 400
 
         # 必要な処理を実行 (例: Redis に保存)
-        redis_client.set_hash_from_json(user_id, json.dumps(json_data))
+        # redis_client.set(user_id, json.dumps(json_data))
 
         return jsonify({"message": "Data saved successfully"}), 200
     except Exception as e:
