@@ -36,7 +36,16 @@ def go_to_next_step(event):
     reply_token=event.reply_token
 
     # Redisから現在地を取得
-    current_scenario=redis_client.hget(user_id,'current_scenario')
+    current_scenario = redis_client.hget(user_id, 'current_scenario')
+    if current_scenario is None:
+        # キーが存在しない、または値がNoneの場合の処理
+        current_scenario = 'default_scenario'  # デフォルト値を設定
+    elif not isinstance(current_scenario, bytes):
+        # 期待されるデータ型でない場合の処理
+        raise TypeError(f"Unexpected type for current_scenario: {type(current_scenario)}")
+    else:
+        # Redisはバイト文字列を返すためデコード
+        current_scenario = current_scenario.decode('utf-8')
     
     # ユーザーからの応答
     if isinstance(message,TextMessage):
