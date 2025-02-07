@@ -140,4 +140,8 @@ def get_scenario_end_message():
         )
     return reply_message
 
-
+def redis_reset():
+    reply_message=TextSendMessage(
+        text="Redisのデータをリセットしました"
+        )
+    return reply_message
