@@ -67,7 +67,7 @@ def go_to_next_step(event):
 
     if request_text=="redis_reset":
         redis_client.delete(user_id)
-        redis_reset()
+        line_api.reply_message(reply_token,redis_reset())
         
     elif request_text=="調味料の登録":
         # a_step_2
