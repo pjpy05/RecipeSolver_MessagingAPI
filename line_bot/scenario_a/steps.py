@@ -36,8 +36,12 @@ def go_to_next_step(event):
     message=event.message
     reply_token=event.reply_token
 
-    # Redisから現在地を取得
-    current_scenario=redis_client.hget(user_id,'current_scenario')
+    if request_text=="redis_reset":
+        redis_client.delete(user_id)
+        line_api.reply_message(reply_token,redis_reset())
+    else:    
+        # Redisから現在地を取得
+        current_scenario=redis_client.hget(user_id,'current_scenario')
     
     # ユーザーからの応答
     if isinstance(message,TextMessage):
@@ -65,9 +69,8 @@ def go_to_next_step(event):
     # elif current_scenario =="a_step_3":
     #         scenario_a.handle_step_4_1_2(event)
 
-    if request_text=="redis_reset":
-        redis_client.delete(user_id)
-        line_api.reply_message(reply_token,redis_reset())
+    if request_text=="test_steps":
+        line_api.reply_message(reply_token,test_steps())
         
     elif request_text=="調味料の登録":
         # a_step_2

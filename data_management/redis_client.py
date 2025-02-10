@@ -37,21 +37,3 @@ class RedisClient:
         # JSON形式の文字列に変換
         return json.dumps(hash_data, ensure_ascii=False)
     
-    # LIFFで使用
-    def set_hash_from_json(self, hash_name: str, json_data: str) -> None:
-        """
-        JSONデータを受け取り、それをRedisのハッシュとしてセットする。
-        
-        :param hash_name: Redisに保存するハッシュの名前
-        :param json_data: JSON形式の文字列
-        """
-        try:
-            # JSON文字列を辞書に変換
-            data = json.loads(json_data)
-            if not isinstance(data, dict):
-                raise ValueError("JSONデータは辞書形式でなければなりません。")
-            
-            # Redisにハッシュとしてセット
-            self.client.hset(hash_name, mapping=data)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"無効なJSON形式です: {e}")

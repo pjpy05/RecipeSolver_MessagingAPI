@@ -18,6 +18,10 @@ line_handler=line_client.handler
 CORS(app)  # 全てのエンドポイントでCORSを許可
 # フロントエンドからバックエンドにリクエストを送る際、CORS設定が不足しているとエラーが発生します。
 
+@app.route("/", methods=["GET"])
+def home():
+    return "Server is running", 200
+
 # Webhookエンドポイントを設定
 @app.route("/webhook", methods=["POST"])
 def webhook():
@@ -52,22 +56,6 @@ def handle_message(event):
 def get_redis_json(user_id):
     redis_json = get_context(user_id)
     return redis_json
-
-# LIFFアプリから受け取ったJSONデータをRedisに渡すAPIエンドポイント
-@app.route('/post/<user_id>', methods=['POST'])
-def set_json_redis(user_id):
-    try:
-        # JSON データをリクエストから取得
-        json_data = request.get_json()
-        if not json_data:
-            return jsonify({"error": "No JSON data provided"}), 400
-
-        # 必要な処理を実行 (例: Redis に保存)
-        # redis_client.set(user_id, json.dumps(json_data))
-
-        return jsonify({"message": "Data saved successfully"}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
 if __name__ == "__main__":
