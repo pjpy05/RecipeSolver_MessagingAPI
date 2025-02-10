@@ -35,6 +35,12 @@ def go_to_next_step(event):
     user_id=event.source.user_id
     message=event.message
     reply_token=event.reply_token
+    
+    # ユーザーからの応答
+    if isinstance(message,TextMessage):
+        request_text=message.text
+    else:
+        request_text=""
 
     if request_text=="redis_reset":
         redis_client.delete(user_id)
@@ -42,12 +48,6 @@ def go_to_next_step(event):
     else:    
         # Redisから現在地を取得
         current_scenario=redis_client.hget(user_id,'current_scenario')
-    
-    # ユーザーからの応答
-    if isinstance(message,TextMessage):
-        request_text=message.text
-    else:
-        request_text=""
 
     # # ユーザーごとのGoogleシートに分けるバージョン
     # if request_text=="scenario_a":
@@ -70,7 +70,7 @@ def go_to_next_step(event):
     #         scenario_a.handle_step_4_1_2(event)
 
     if request_text=="test_steps":
-        line_api.reply_message(reply_token,test_steps())
+        pass
         
     elif request_text=="調味料の登録":
         # a_step_2
